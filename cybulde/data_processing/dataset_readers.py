@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 import dask.dataframe as dd
-import os 
+import os
 from cybulde.utils.utils import get_logger
 from dask_ml.model_selection import train_test_split
+
 
 class DatasetReaders(ABC):
     required_columns = {"text", "label", "split", "dataset_name"}
@@ -22,9 +23,8 @@ class DatasetReaders(ABC):
             raise ValueError(f"Dataset must contain all required columns: {self.required_columns}")
         unique_split_names = set(df["split"].unique().compute().tolist())
         if unique_split_names != self.split_names:
-            raise ValueError(f"Dataset must contain all split names: {self.split_names}.") 
+            raise ValueError(f"Dataset must contain all split names: {self.split_names}.")
         return df[list(self.required_columns)]
-        
 
     @abstractmethod
     def _read_data(self) -> tuple[dd.core.DataFrame, dd.core.DataFrame, dd.core.DataFrame]:
@@ -41,8 +41,8 @@ class DatasetReaders(ABC):
         dev_df["split"] = "dev"
         test_df["split"] = "test"
         return dd.concat([train_df, dev_df, test_df])
-    
-    def split_dataset(self, df: dd.core.DataFrame, 
+
+    def split_dataset(self, df: dd.core.DataFrame,
                       test_size: float,
                       stratify_column: Optional[str]) -> tuple[dd.core.DataFrame, dd.core.DataFrame]:
         if stratify_column is None:
@@ -68,7 +68,7 @@ class GHCDatasetReader(DatasetReaders):
         self.dev_split_ratio = dev_split_ratio
 
     def _read_data(self) -> tuple[dd.core.DataFrame, dd.core.DataFrame, dd.core.DataFrame]:
-        self.logger.info(f"Reading GHC dataset...")
+        self.logger.info("Reading GHC dataset...")
         train_tsv_path = os.path.join(self.dataset_dir, "ghc_train.tsv")
         train_df = dd.read_csv(train_tsv_path, sep="\t", header=0)
 

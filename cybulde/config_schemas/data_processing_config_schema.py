@@ -6,6 +6,7 @@ from omegaconf import MISSING
 from cybulde.config_schemas.infrastructure import gcp_schema
 from cybulde.config_schemas.data_processing import dataset_readers_schema
 
+
 @dataclass
 class DataProcessingConfig:
     version: str = MISSING

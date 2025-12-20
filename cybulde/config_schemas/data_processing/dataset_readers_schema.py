@@ -16,6 +16,7 @@ class GHCDatasetReaderConfig(DatasetReaderConfig):
     _target_: str = "cybulde.data_processing.dataset_readers.GHCDatasetReader"
     dev_split_ratio: float = MISSING
 
+
 @dataclass
 class DatasetReaderManagerConfig:
     _target_: str = "cybulde.data_processing.dataset_readers.DatasetReaderManager"
@@ -25,8 +26,5 @@ class DatasetReaderManagerConfig:
 def setup_config() -> None:
     cs = ConfigStore.instance()
     cs.store(name="dataset_reader_manager_config_schema", node=DatasetReaderManagerConfig, group="dataset_reader_manager")
-    
+
     cs.store(name="ghc_dataset_reader_config_schema", node=GHCDatasetReaderConfig, group="dataset_reader_manager/dataset_reader")
-    
-
-
