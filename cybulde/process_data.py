@@ -3,15 +3,11 @@ from cybulde.utils.config_utils import get_config
 from cybulde.utils.gcp_utils import access_secret_version
 from cybulde.utils.data_utils import get_raw_data_with_version
 
+from hydra.utils import instantiate
+
 
 @get_config(config_path="../configs", config_name="data_processing_config")
 def process_data(config: DataProcessingConfig) -> None:
-    print(config)
-    from omegaconf import OmegaConf
-    print(60 * "#")
-    print(OmegaConf.to_yaml(config))
-    return
-
     github_access_token = access_secret_version(config.infrastructure.project_id, config.github_access_token_secret_id)
 
     get_raw_data_with_version(
@@ -22,6 +18,12 @@ def process_data(config: DataProcessingConfig) -> None:
         github_user_name=config.github_user_name,
         github_access_token=github_access_token
     )
+
+    dataset_reader_manager = instantiate(config.dataset_reader_manager)
+
+    df = dataset_reader_manager.read_data()
+
+    print(df.head())
 
 
 if __name__ == "__main__":

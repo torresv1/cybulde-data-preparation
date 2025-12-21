@@ -85,9 +85,9 @@ class GHCDatasetReader(DatasetReaders):
 
 class DatasetReaderManager:
     def __init__(self, dataset_reader: dict[str, DatasetReaders]) -> None:
-        self.dataset_reader = dataset_reader
+        self.dataset_readers = dataset_reader
 
-    def get_dataset(self) -> dd.core.DataFrame:
-        dfs = [dataset_reader.read_data() for dataset_reader in self.dataset_reader.values()]
+    def read_data(self) -> dd.core.DataFrame:
+        dfs = [dataset_reader.read_data() for dataset_reader in self.dataset_readers.values()]
         df = dd.concat(dfs)
         return df

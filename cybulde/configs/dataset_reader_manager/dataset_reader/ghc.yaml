@@ -1,5 +1,3 @@
-defaults:
-  - ghc_dataset_reader_schema
 
 _target_: cybulde.data_processing.dataset_readers.GHCDatasetReader
 dataset_dir: ${data_local_save_dir}/ghc

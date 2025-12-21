@@ -1,4 +1,4 @@
-from pydantic.dataclasses import dataclass
+from dataclasses import dataclass
 from hydra.core.config_store import ConfigStore
 
 
