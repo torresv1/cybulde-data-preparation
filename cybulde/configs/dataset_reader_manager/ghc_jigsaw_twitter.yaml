@@ -1,4 +1,7 @@
 defaults:
  - dataset_reader_manager_schema
- - dataset_reader@dataset_readers.ghc
+ - dataset_reader@dataset_readers.ghc: ghc
+
+_target_: cybulde.data_processing.dataset_readers.DatasetReaderManager
+
  
