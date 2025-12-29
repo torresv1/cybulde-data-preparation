@@ -1,7 +1,8 @@
 defaults:
- - dataset_reader_manager_schema
- - dataset_reader@dataset_readers.ghc: ghc
+  - dataset_reader_manager_schema
+  - dataset_reader@dataset_readers.ghc: ghc
+  - dataset_reader@dataset_readers.jtc: jtc
+  - dataset_reader@dataset_readers.twitter: twitter
 
-_target_: cybulde.data_processing.dataset_readers.DatasetReaderManager
 
  

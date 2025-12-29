@@ -31,6 +31,13 @@ flake8 = "~=6.0"
 mypy = "~=1.2"
 jupyterlab = "~=4.2"
 
+types-PyYAML = "~=6.0.12.20250915"
+types-cachetools ="~=6.2.0.20251022"
+types-decorator = "~=5.2.0.20251101"
+types-pycurl = "~=7.45.7.20251101"
+types-python-dateutil = "~=2.9.0.20251115"
+types-requests = "~=2.32.4.20250913"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

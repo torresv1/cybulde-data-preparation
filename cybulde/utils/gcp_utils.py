@@ -3,14 +3,13 @@ from google.cloud import secretmanager
 
 def access_secret_version(project_id: str, secret_id: str, version_id: str = "1") -> str:
     """
-    Access the payload for the given secret version if one exists.
-    Args:
-        project_id (str): GCP project ID
-        secret_id (str): ID of the secret
-        version_id (str): Version of the secret (e.g., "latest")
-Returns:
-    str: The secret payload
-"""
+        Access the payload for the given secret version if one exists.
+        Args:
+            project_id (str): GCP project ID
+            secret_id (str): ID of the secret
+            version_id (str): Version of the secret (e.g., "latest")
+    Returns:
+        str: The secret payload"""
 
     # Create the Secret Manager client.
     client = secretmanager.SecretManagerServiceClient()
