@@ -1,0 +1,13 @@
+defaults:
+  - gcp_dask_cluster_schema
+
+machine_type: "n1-standard-1"
+docker_image: ${docker_image_name}:${docker_image_tag}
+docker_args: >
+  --log-driver=gcplogs
+num_workers: 3
+worker_options:
+  nthreads: 1
+preemptible: false
+extra_bootstrap:
+  - "gcloud auth configure-docker --quiet us-east4-docker.pkg.dev"

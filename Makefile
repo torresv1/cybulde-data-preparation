@@ -19,15 +19,38 @@ DIRS_TO_VALIDATE = cybulde
 DOCKER_COMPOSE_RUN = $(DOCKER_COMPOSE_COMMAND) run --rm $(SERVICE_NAME)
 DOCKER_COMPOSE_EXEC = $(DOCKER_COMPOSE_COMMAND) exec $(SERVICE_NAME)
 
+LOCAL_DOCKER_IMAGE_NAME = cybulde-data-preparation
+GCP_DOCKER_IMAGE_NAME = us-east4-docker.pkg.dev/emkademy-vladimir/cybulde1/cybulde-data-preparation
+GCP_DOCKER_IMAGE_TAG := $(strip $(shell uuidgen))
+
 export
 
 # Returns true if the stem is a non-empty environment variable, or else raises an error.
 guard-%:
 	@#$(or ${$*}, $(error $* is not set))
 
-## Call entrypoint
-process-data: up
+## Generate final config. CONFIG_NAME=<config_name> has to be provided. For overrides use OVERRIDES="<overrides>"
+generate-final-config: up guard-CONFIG_NAME
+	$(DOCKER_COMPOSE_EXEC) python ./cybulde/utils/generate_final_config.py --config_name=$(CONFIG_NAME) --overrides docker_image_name=$(GCP_DOCKER_IMAGE_NAME) docker_image_tag=$(GCP_DOCKER_IMAGE_TAG) $(if $(OVERRIDES), $(OVERRIDES))
+
+## Generate final processing config. For overrides use OVERRIDES="<overrides>"
+generate-final-data-processing-config: up 
+	$(DOCKER_COMPOSE_EXEC) python ./cybulde/utils/generate_final_config.py --config_name data_processing_config --overrides docker_image_name=$(GCP_DOCKER_IMAGE_NAME) docker_image_tag=$(GCP_DOCKER_IMAGE_TAG) $(if $(OVERRIDES), $(OVERRIDES))
+
+## Processes raw data
+process-data: generate-final-data-processing-config push
 	$(DOCKER_COMPOSE_EXEC) python ./cybulde/process_data.py
+
+## Processes local raw data
+local-process-data: generate-final-data-processing-config
+	$(DOCKER_COMPOSE_EXEC) python ./cybulde/process_data.py
+
+
+## Pushes docker image to GCP Artifact Registry
+push: build
+	gcloud auth configure-docker us-east4-docker.pkg.dev
+	docker tag $(LOCAL_DOCKER_IMAGE_NAME):latest $(GCP_DOCKER_IMAGE_NAME):$(GCP_DOCKER_IMAGE_TAG)
+	docker push $(GCP_DOCKER_IMAGE_NAME):$(GCP_DOCKER_IMAGE_TAG)
 
 ## Starts jupyter lab
 notebook: up

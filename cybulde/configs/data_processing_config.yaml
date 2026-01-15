@@ -3,6 +3,7 @@ defaults:
   - data_processing_config_schema
   - dataset_reader_manager: ghc_jigsaw_twitter
   - dataset_cleaner_manager: simple_dataset_cleaner
+  - dask_cluster: gcp_dask_cluster_schema
 
   - override hydra/job_logging: custom
   - override hydra/hydra_logging: disabled
@@ -13,3 +14,4 @@ hydra:
     dir: .
 
 version: v7
+processed_data_save_dir: gs://cybulde1/data/processed/${run_tag}

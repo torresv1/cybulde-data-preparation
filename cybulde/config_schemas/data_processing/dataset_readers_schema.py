@@ -1,8 +1,9 @@
-from dataclasses import dataclass, field
-from typing import Any
+from dataclasses import dataclass
 
 from hydra.core.config_store import ConfigStore
-from omegaconf import MISSING
+from omegaconf import MISSING, SI
+
+from typing import Optional
 
 
 @dataclass
@@ -10,6 +11,11 @@ class DatasetReaderConfig:
     _target_: str = MISSING
     dataset_dir: str = MISSING
     dataset_name: str = MISSING
+    gcp_project_id: str = SI("${infrastructure.project_id}")
+    gcp_github_access_token_secret_id: str = SI("${github_access_token_secret_id}")
+    dvc_remote_repo: str = SI("${dvc_remote_repo}")
+    github_user_name: str = SI("${github_user_name}")
+    version: str = SI("${version}")
 
 
 @dataclass
@@ -34,7 +40,9 @@ class TwitterDatasetReaderConfig(DatasetReaderConfig):
 @dataclass
 class DatasetReaderManagerConfig:
     _target_: str = "cybulde.data_processing.dataset_readers.DatasetReaderManager"
-    dataset_readers: dict[str, Any] = field(default_factory=dict)
+    dataset_readers: dict[str, DatasetReaderConfig] = MISSING
+    repartition: bool = True
+    available_memory: Optional[float] = None
 
 
 def setup_config() -> None:

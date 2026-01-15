@@ -6,6 +6,10 @@ from hydra.core.config_store import ConfigStore
 @dataclass
 class GCPConfig:
     project_id: str = "emkademy-vladimir"
+    zone: str = "us-east4-a"
+    network: str = "default"
+    
+
 
 
 def setup_config() -> None:
