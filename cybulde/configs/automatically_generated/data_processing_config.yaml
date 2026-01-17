@@ -72,23 +72,36 @@ dataset_cleaner_manager:
         prefix_length: 7
         count_threshold: 1
 dask_cluster:
-  _target_: dask.distributed.LocalCluster
-  n_workers: 4
-  memory_limit: 8GB
-  processes: true
-  threads_per_worker: 1
-  scheduler_port: 8786
-  silence_logs: 30
-  host: null
-  dashboard_address: :8787
-  asynchronous: false
-  blocked_handlers: null
-  service_kwargs: null
-  security: null
-  protocol: null
-  interface: null
-  worker_class: null
+  _target_: dask_cloudprovider.gcp.GCPCluster
+  n_workers: 0
+  projectid: emkademy-vladimir
+  zone: us-east4-a
+  network: default
+  network_projectid: emkademy-vladimir
+  machine_type: n1-standard-1
+  source_image: projects/cos-cloud/global/images/family/cos-stable
+  docker_image: daskdev/dask:latest
+  docker_args: null
+  bootstrap: false
+  extra_bootstrap:
+  - gcloud auth configure-docker --quiet us-east4-docker.pkg.dev
+  ngpus: 0
+  gpu_type: null
+  filesystem_size: 50
+  disk_type: pd-standard
+  on_host_maintenance: TERMINATE
+  worker_class: dask.distributed.Nanny
+  worker_options: {}
+  env_vars: {}
+  scheduler_options: {}
+  silence_logs: null
+  asynchronous: null
+  security: true
+  preemptible: false
+  debug: false
+  instance_labels: null
+  service_account_credentials: null
 processed_data_save_dir: gs://cybulde1/data/processed/default_run
 run_tag: default_run
 docker_image_name: us-east4-docker.pkg.dev/emkademy-vladimir/cybulde1/cybulde-data-preparation
-docker_image_tag: 4b422ae8-7ed4-4050-a156-5d1c5a24d04b
+docker_image_tag: b0b1d222-259f-4519-9d69-3809b9fce07c

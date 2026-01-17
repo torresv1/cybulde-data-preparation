@@ -6,8 +6,9 @@ services:
     image: cybulde-data-preparation
     platform: linux/amd64
     container_name: cybulde-data-preparation-container
-    environment:
-      - GOOGLE_APPLICATION_CREDENTIALS=./creds/emkademy-vladimir-1ab083bf6d75.json
+    # environment:
+      # Use gcloud credentials instead of service account
+      # - GOOGLE_APPLICATION_CREDENTIALS=./creds/emkademy-vladimir-1ab083bf6d75.json
     build:
       context: .
       dockerfile: ./docker/Dockerfile
@@ -23,7 +24,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 32G
+          memory: 3.75G
 
     ipc: host
     init: true
