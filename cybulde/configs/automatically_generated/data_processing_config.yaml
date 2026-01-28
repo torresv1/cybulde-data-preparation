@@ -6,7 +6,7 @@ github_user_name: torresv1
 github_access_token_secret_id: cybulde-data-github-access-token
 infrastructure:
   project_id: emkademy-vladimir
-  zone: us-east4-a
+  zone: us-central1-a
   network: default
 dataset_reader_manager:
   _target_: cybulde.data_processing.dataset_readers.DatasetReaderManager
@@ -75,18 +75,22 @@ dask_cluster:
   _target_: dask_cloudprovider.gcp.GCPCluster
   n_workers: 0
   projectid: emkademy-vladimir
-  zone: us-east4-a
+  zone: us-central1-a
   network: default
   network_projectid: emkademy-vladimir
   machine_type: n1-standard-1
   source_image: projects/cos-cloud/global/images/family/cos-stable
-  docker_image: daskdev/dask:latest
+  docker_image: us-east4-docker.pkg.dev/emkademy-vladimir/cybulde1/cybulde-data-preparation:664332f5-74df-44b8-ac17-09a47fca7500
   docker_args: null
   bootstrap: false
   extra_bootstrap:
   - gcloud auth configure-docker --quiet us-east4-docker.pkg.dev
-  ngpus: 0
+  ngpus: null
   gpu_type: null
+  scheduler_ngpus: 0
+  scheduler_gpu_type: null
+  worker_ngpus: 0
+  worker_gpu_type: null
   filesystem_size: 50
   disk_type: pd-standard
   on_host_maintenance: TERMINATE
@@ -104,4 +108,4 @@ dask_cluster:
 processed_data_save_dir: gs://cybulde1/data/processed/default_run
 run_tag: default_run
 docker_image_name: us-east4-docker.pkg.dev/emkademy-vladimir/cybulde1/cybulde-data-preparation
-docker_image_tag: b0b1d222-259f-4519-9d69-3809b9fce07c
+docker_image_tag: 664332f5-74df-44b8-ac17-09a47fca7500

@@ -14,4 +14,6 @@ hydra:
     dir: .
 
 version: v7
+docker_image_name: us-east4-docker.pkg.dev/emkademy-vladimir/cybulde1/cybulde-data-preparation
+docker_image_tag: latest
 processed_data_save_dir: gs://cybulde1/data/processed/${run_tag}

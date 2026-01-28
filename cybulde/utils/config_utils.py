@@ -150,8 +150,10 @@ def custom_instantiate(config: Any) -> Any:
         gcp_only_params = {
             'projectid', 'zone', 'network', 'network_projectid', 'machine_type',
             'source_image', 'docker_image', 'docker_args', 'extra_bootstrap',
-            'ngpus', 'gpu_type', 'filesystem_size', 'disk_type', 'on_host_maintenance',
-            'preemptible', 'instance_labels', 'service_account', 'service_account_credentials'
+            'ngpus', 'gpu_type', 'scheduler_ngpus', 'scheduler_gpu_type',
+            'worker_ngpus', 'worker_gpu_type', 'filesystem_size', 'disk_type',
+            'on_host_maintenance', 'preemptible', 'instance_labels',
+            'service_account', 'service_account_credentials'
         }
         
         # Store original __init__ methods

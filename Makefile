@@ -31,11 +31,11 @@ guard-%:
 
 ## Generate final config. CONFIG_NAME=<config_name> has to be provided. For overrides use OVERRIDES="<overrides>"
 generate-final-config: up guard-CONFIG_NAME
-	$(DOCKER_COMPOSE_EXEC) python ./cybulde/utils/generate_final_config.py --config_name=$(CONFIG_NAME) --overrides docker_image_name=$(GCP_DOCKER_IMAGE_NAME) docker_image_tag=$(GCP_DOCKER_IMAGE_TAG) $(if $(OVERRIDES), $(OVERRIDES))
+	$(DOCKER_COMPOSE_EXEC) python ./cybulde/utils/generate_final_config.py --config_name=$(CONFIG_NAME) --overrides docker_image_name=$(GCP_DOCKER_IMAGE_NAME) docker_image_tag=$(GCP_DOCKER_IMAGE_TAG) dask_cluster.docker_image=$(GCP_DOCKER_IMAGE_NAME):$(GCP_DOCKER_IMAGE_TAG) $(if $(OVERRIDES), $(OVERRIDES))
 
 ## Generate final processing config. For overrides use OVERRIDES="<overrides>"
 generate-final-data-processing-config: up 
-	$(DOCKER_COMPOSE_EXEC) python ./cybulde/utils/generate_final_config.py --config_name data_processing_config --overrides docker_image_name=$(GCP_DOCKER_IMAGE_NAME) docker_image_tag=$(GCP_DOCKER_IMAGE_TAG) $(if $(OVERRIDES), $(OVERRIDES))
+	$(DOCKER_COMPOSE_EXEC) python ./cybulde/utils/generate_final_config.py --config_name data_processing_config --overrides docker_image_name=$(GCP_DOCKER_IMAGE_NAME) docker_image_tag=$(GCP_DOCKER_IMAGE_TAG) dask_cluster.docker_image=$(GCP_DOCKER_IMAGE_NAME):$(GCP_DOCKER_IMAGE_TAG) $(if $(OVERRIDES), $(OVERRIDES))
 
 ## Processes raw data
 process-data: generate-final-data-processing-config push

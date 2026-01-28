@@ -44,14 +44,18 @@ class GCPDaskClusterConfig(DaskClusterConfig):
     network_projectid: Optional[str] = SI("${infrastructure.project_id}")
     machine_type: str = "n1-standard-1"
     source_image: str = "projects/cos-cloud/global/images/family/cos-stable"
-    docker_image: Optional[str] = "daskdev/dask:latest"
+    docker_image: Optional[str] = None
     docker_args: Optional[list[str]] = None
     bootstrap: bool = False
     extra_bootstrap: Optional[list[str]] = field(default_factory=lambda: [
         "gcloud auth configure-docker --quiet us-east4-docker.pkg.dev"
     ])
-    ngpus: Optional[int] = 0
+    ngpus: Optional[int] = None
     gpu_type: Optional[str] = None
+    scheduler_ngpus: int = 0
+    scheduler_gpu_type: Optional[str] = None
+    worker_ngpus: int = 0
+    worker_gpu_type: Optional[str] = None
     filesystem_size: int = 50  # in GB
     disk_type: str = "pd-standard"
     on_host_maintenance: str = "TERMINATE"

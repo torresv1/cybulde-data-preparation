@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "emkademy-vladimir"
 version = "0.1.0"
-description = "Cyber-bullying Detection on Social Media"
+description = ""
 authors = ["Vladimir Torres Rivas <vladimir.torres.rivas@gmail.com>"]
 readme = "README.md"
 
@@ -10,48 +10,39 @@ python = ">=3.10,<3.11"
 hydra-core = "~=1.3.2"
 pydantic = "~=1.10.7"
 pandas = "~=2.0"
-nltk = "~=3.8"
+numpy = "~=1.26"
+nltk = "~3.8"
 symspellpy = "~=6.7"
-fsspec = {version = "~=2023.5", extras = ["gcs"]}
-gcsfs = "~=2023.5"
+fsspec = {version = "~=2025.12", extras = ["gcs"]}
+gcsfs = "~=2025.12"
 google-cloud-secret-manager = "~=2.16"
 fastparquet = "~=2023.4"
-dvc = {version = "~=2.56", extras = ["gdrive", "gs"]}
-dask = {version = "~=2023.5", extras = ["complete"]}
-distributed = "~=2023.5"
-dask-cloudprovider = {version = "2022.10", extras=["gcp"]}
-dask-ml = "~=2023.3"
-bokeh = "~=3.1"
-fastapi = "~=0.104"
-uvicorn = {version = "~=0.24", extras=["standard"]}
-
-# Fix pyOpenSSL/cryptography compatibility issue
+dvc = {version = "~=3.64", extras = ["gdrive", "gs"]}
+pygit2 = "1.14.1"
+dask = {version = "~=2025.1", extras = ["complete"]}
+dask-expr = "~2.0.0"
+distributed = "~=2025.1"
+dask-cloudprovider = {version = "~=2025.1", extras = ["gcp"]}
+pyarrow = "~=18.1"
+bokeh = "~=3.3"
 pyOpenSSL = ">=23.0.0"
-cryptography = ">=38.0.0,<42.0.0"
-
-# Tokenization
-tokenizers = "~=0.13"
-transformers = "~=4.30.1"
+cryptography = ">=41.0.0"
+pathspec = "<0.12.0"
 
 [tool.poetry.group.dev.dependencies]
-jupyterlab = "~=3.6"
 pytest = "~=7.3"
 black = "~=23.3"
 isort = "~=5.12"
 flake8 = "~=6.0"
 mypy = "~=1.2"
+jupyterlab = "~=4.2"
 
-types-PyYAML = "~=6.0.12.10" 
-types-decorator = "~=5.1.8.3" 
-types-paramiko = "~=3.0.0.10" 
-types-protobuf = "~=4.23.0.1" 
-types-pyOpenSSL = "~=23.1.0.3" 
-types-python-dateutil = "~=2.8.19.13" 
-types-requests = "~=2.30.0.0" 
-types-setuptools = "~=67.8.0.0" 
-types-six = "~=1.16.21.8" 
-types-typed-ast = "~=1.5.8.6" 
-types-urllib3 = "~=1.26.25.13"
+types-PyYAML = "~=6.0.12.20250915"
+types-cachetools ="~=6.2.0.20251022"
+types-decorator = "~=5.2.0.20251101"
+types-pycurl = "~=7.45.7.20251101"
+types-python-dateutil = "~=2.9.0.20251115"
+types-requests = "~=2.32.4.20250913"
 
 [build-system]
 requires = ["poetry-core"]
