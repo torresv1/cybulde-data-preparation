@@ -5,7 +5,7 @@ machine_type: "n1-standard-1"
 docker_image: ${docker_image_name}:${docker_image_tag}
 docker_args: >
   --log-driver=gcplogs
-num_workers: 3
+n_workers: 3
 worker_options:
   nthreads: 1
 preemptible: false

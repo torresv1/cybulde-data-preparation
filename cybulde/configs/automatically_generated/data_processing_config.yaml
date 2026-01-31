@@ -80,7 +80,7 @@ dask_cluster:
   network_projectid: emkademy-vladimir
   machine_type: n1-standard-1
   source_image: projects/cos-cloud/global/images/family/cos-stable
-  docker_image: us-east4-docker.pkg.dev/emkademy-vladimir/cybulde1/cybulde-data-preparation:664332f5-74df-44b8-ac17-09a47fca7500
+  docker_image: us-east4-docker.pkg.dev/emkademy-vladimir/cybulde1/cybulde-data-preparation:5eb75eb7-45fd-43b5-9cf0-32da0e0a8d0d
   docker_args: null
   bootstrap: false
   extra_bootstrap:
@@ -108,4 +108,4 @@ dask_cluster:
 processed_data_save_dir: gs://cybulde1/data/processed/default_run
 run_tag: default_run
 docker_image_name: us-east4-docker.pkg.dev/emkademy-vladimir/cybulde1/cybulde-data-preparation
-docker_image_tag: 664332f5-74df-44b8-ac17-09a47fca7500
+docker_image_tag: 5eb75eb7-45fd-43b5-9cf0-32da0e0a8d0d

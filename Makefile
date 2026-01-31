@@ -45,6 +45,9 @@ process-data: generate-final-data-processing-config push
 local-process-data: generate-final-data-processing-config
 	$(DOCKER_COMPOSE_EXEC) python ./cybulde/process_data.py
 
+## Check GCP setup for Dask cluster
+check-gcp: up
+	$(DOCKER_COMPOSE_EXEC) python ./cybulde/check_gcp_setup.py
 
 ## Pushes docker image to GCP Artifact Registry
 push: build
@@ -106,6 +109,7 @@ lock-dependencies: build-for-dependencies
 
 ## Starts docker containers using "docker-compose up -d"
 up:
+	@docker rm -f $(CONTAINER_NAME) 2>/dev/null || true
 	$(DOCKER_COMPOSE_COMMAND) up -d
 
 ## docker-compose down
